@@ -8,7 +8,7 @@ namespace ShopApp.Entities
 {
 	public class Product
 	{
-		public int Id { get; set; }	
+		public int ProductId { get; set; }	
 
 		public string Name { get; set; }
 
@@ -16,6 +16,6 @@ namespace ShopApp.Entities
 
 		public decimal Price { get; set; }
 
-		public List<ProductCategory> ProductCategories { get; set; }
+		public virtual ICollection<ProductCategory> ProductCategories { get; set; }
 	}
 }

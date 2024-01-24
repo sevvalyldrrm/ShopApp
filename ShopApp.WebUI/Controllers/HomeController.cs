@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopApp.Business.Abstract;
+using ShopApp.DataAccess.Abstract;
 using ShopApp.WebUI.Models;
 using System.Diagnostics;
 
@@ -6,16 +8,21 @@ namespace ShopApp.WebUI.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+		//private readonly IConfiguration _configuration;
+		private readonly IProductService _productService;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(IProductService productService)
 		{
-			_logger = logger;
+			_productService = productService;
 		}
 
 		public IActionResult Index()
 		{
-			return View();
+			return View(new ProductListModel()
+			{
+				Products = _productService.GetPopulerProducts()
+
+			}); 
 		}
 
 		public IActionResult Privacy()
