@@ -31,11 +31,11 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 			}
 		}
 
-		public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+		public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
 		{
 			using (var context = new TContext())
 			{
-				return filter == null ? context.Set<TEntity>() : context.Set<TEntity>().Where(filter);
+				return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
 			}
 		}
 
@@ -64,9 +64,5 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 			}
 		}
 
-		IEnumerable<TEntity> IGenericRepository<TEntity>.GetAll(Expression<Func<TEntity, bool>> filter)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
